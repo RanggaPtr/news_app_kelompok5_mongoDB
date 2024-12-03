@@ -22,8 +22,13 @@ $news = $collection->find();
     <div id="news-list">
       <?php
       foreach ($news as $article) {
+        $createdAtUTC = $article['created_at']->toDateTime(); 
+        $createdAtUTC->setTimezone(new DateTimeZone('Asia/Jakarta')); 
+        $createdAt = $createdAtUTC->format('d M Y, H:i'); 
+
         echo "<div class='news-item'>";
         echo "<h2><a href='news_detail.php?id=" . $article['_id'] . "'>" . $article['title'] . "</a></h2>";
+        echo "<p><strong>Date:</strong> " . $createdAt . "</p>"; 
         echo "<p>" . $article['summary'] . "</p>";
         echo "</div>";
       }
