@@ -15,10 +15,28 @@ $news = $collection->find();
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>Admin Panel</h1>
-    <input type="text" id="search" placeholder="Search news..." onkeyup="searchNews()">
-  </header>
+<header>
+  <h1>Admin Panel</h1>
+  <input type="text" id="search" placeholder="Search news..." onkeyup="searchNews()">
+  <a href="userPage.php" class="btn-user-page">Back to User Page</a>
+  <style>
+  .btn-user-page {
+      display: inline-block;
+      margin-left: 10px;
+      padding: 10px 15px;
+      background-color: #007BFF;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 14px;
+  }
+
+  .btn-user-page:hover {
+      background-color: #0056b3;
+  }
+</style>
+</header>
+
   
   <main>
     <h2>Manage News Articles</h2>
