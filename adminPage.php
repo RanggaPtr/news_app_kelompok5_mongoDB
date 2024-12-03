@@ -45,19 +45,23 @@ $news = $collection->find();
   </main>
 
   <script>
-    function searchNews() {
-      let input = document.getElementById('search').value.toLowerCase();
-      let newsItems = document.querySelectorAll('.news-item');
+  function searchNews() {
+    let input = document.getElementById('search').value.toLowerCase(); // Ambil nilai input
+    let newsItems = document.querySelectorAll('.news-item'); // Pilih semua item berita
 
-      newsItems.forEach(function(item) {
-        let title = item.querySelector('h2').textContent.toLowerCase();
-        if (title.indexOf(input) > -1) {
-          item.style.display = '';
-        } else {
-          item.style.display = 'none';
-        }
-      });
-    }
-  </script>
+    newsItems.forEach(function(item) {
+      // Ambil teks dari elemen <h3>
+      let title = item.querySelector('h3').textContent.toLowerCase();
+
+      // Cocokkan dengan input pencarian
+      if (title.indexOf(input) > -1) {
+        item.style.display = ''; // Tampilkan item jika cocok
+      } else {
+        item.style.display = 'none'; // Sembunyikan item jika tidak cocok
+      }
+    });
+  }
+</script>
+
 </body>
 </html>
