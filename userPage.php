@@ -21,7 +21,7 @@ if ($selectedCategory) {
 // Ambil semua kategori unik dari database
 $categories = $collection->distinct('category');
 ?>
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 
