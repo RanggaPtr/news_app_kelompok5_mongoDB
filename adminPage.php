@@ -46,18 +46,17 @@ $news = $collection->find();
 
   <script>
   function searchNews() {
-    let input = document.getElementById('search').value.toLowerCase(); // Ambil nilai input
-    let newsItems = document.querySelectorAll('.news-item'); // Pilih semua item berita
+    let input = document.getElementById('search').value.toLowerCase();
+    let newsItems = document.querySelectorAll('.news-item'); 
 
     newsItems.forEach(function(item) {
-      // Ambil teks dari elemen <h3>
+
       let title = item.querySelector('h3').textContent.toLowerCase();
 
-      // Cocokkan dengan input pencarian
       if (title.indexOf(input) > -1) {
-        item.style.display = ''; // Tampilkan item jika cocok
+        item.style.display = ''; 
       } else {
-        item.style.display = 'none'; // Sembunyikan item jika tidak cocok
+        item.style.display = 'none'; 
       }
     });
   }
