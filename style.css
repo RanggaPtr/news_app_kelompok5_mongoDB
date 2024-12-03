@@ -1,80 +1,124 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-  }
-  
-  header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-    text-align: center;
-  }
-  
-  input[type="text"], textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-  }
-  
-  button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  #news-list {
-    padding: 20px;
-  }
-  
-  .news-item {
-    background-color: white;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .news-item h2 {
-    margin: 0;
-  }
-  
-  .news-item a {
-    text-decoration: none;
-    color: #333;
-  }
-  
-  .news-item a:hover {
-    color: #007BFF;
-  }
-  
-  av {
-    margin-top: 10px;
-  }
-  
-  nav a {
-    color: #fff; /* Teks putih */
-    text-decoration: none;
-    font-size: 1.2rem;
-    margin: 0 15px;
-    padding: 8px 15px;
-    border-radius: 5px;
-    background-color: #34495e; /* Background gelap saat normal */
-    transition: background-color 0.3s ease, color 0.3s ease;
+header {
+  text-align: center;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+  text-align: center;
+}
+
+.header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.header-container h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 5px 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#news-list {
+  padding: 20px;
+}
+
+.news-item {
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.news-item h2 {
+  margin: 0;
+}
+
+.news-item h2 a {
+  color: #333;
+  text-decoration: none;
+}
+
+.news-item h2 a:hover {
+  text-decoration: underline;
+}
+
+av {
+  margin-top: 10px;
+}
+
+nav a {
+  color: #fff;
+  /* Teks putih */
+  text-decoration: none;
+  font-size: 1.2rem;
+  margin: 0 15px;
+  padding: 8px 15px;
+  border-radius: 5px;
+  background-color: #34495e;
+  /* Background gelap saat normal */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 nav a:hover {
-    background-color: #f4f8fc; /* Background terang saat hover */
-    color: #34495e; /* Teks gelap saat hover */
+  background-color: #f4f8fc;
+  /* Background terang saat hover */
+  color: #34495e;
+  /* Teks gelap saat hover */
 }
 
-h2{
+h2 {
   margin-left: 15px;
+}
+
+#top-right-button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Hover Effect for the Button */
+#top-right-button:hover {
+  background-color: #0056b3;
+}
+
+#search {
+  margin-top: 10px;
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+main {
+  padding: 20px;
 }
