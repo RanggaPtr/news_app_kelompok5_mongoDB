@@ -14,6 +14,7 @@ $news = $collection->find([], ['sort' => ['created_at' => -1]]);
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ZonaBerita</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
   <header>
@@ -28,22 +29,23 @@ $news = $collection->find([], ['sort' => ['created_at' => -1]]);
     </nav>
 
     <div id="news-list">
-  <?php
-  if ($news->isDead()) {
-      echo "<p>No articles available</p>";
-  } else {
-      foreach ($news as $article) {
-          $createdAt = $article['created_at']->toDateTime()->format('d M Y, H:i'); // Format waktu
-          echo "<div class='news-item'>";
-          echo "<h3><a href='news_detail.php?id=" . $article['_id'] . "'>" . htmlspecialchars($article['title']) . "</a></h3>";
-          echo "<p><strong>Summary:</strong> " . htmlspecialchars($article['summary']) . "</p>";
-          echo "<p><strong>Date:</strong> " . $createdAt . "</p>";
-          echo "<a href='edit.php?id=" . $article['_id'] . "'>Edit</a> | ";
-          echo "<a href='delete.php?id=" . $article['_id'] . "' class='delete-link' onclick='return confirm(\"Are you sure you want to delete this article?\")'>Delete</a>";
-          echo "</div>";
+    <?php
+      if ($news->isDead()) {
+          echo "<p>No articles available</p>";
+      } else {
+          foreach ($news as $article) {
+              $createdAt = $article['created_at']->toDateTime()->format('d M Y, H:i'); // Format waktu
+              echo "<div class='news-item'>";
+              echo "<h3><a href='news_detail.php?id=" . $article['_id'] . "'>" . htmlspecialchars($article['title']) . "</a></h3>";
+              echo "<p><strong>Summary:</strong> " . htmlspecialchars($article['summary']) . "</p>";
+              echo "<p><strong>Date:</strong> " . $createdAt . "</p>";
+              echo "<a href='edit.php?id=" . $article['_id'] . "' class='btn btn-primary'>Edit</a> | ";
+              echo "<a href='delete.php?id=" . $article['_id'] . "' class='btn btn-danger' onclick='return confirm(\"Are you sure you want to delete this article?\")'>Delete</a>";
+              echo "</div>";
+          }
       }
-  }
-  ?>
+      ?>
+
 </div>
 
   </main>

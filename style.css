@@ -25,8 +25,9 @@ h2 {
 }
 
 nav {
-  text-align: center;
+  text-align: left;
   margin-bottom: 20px;
+  margin-top: 50px;
 }
 
 nav a {
@@ -77,6 +78,7 @@ button:hover {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
+  text-align: justify;
 }
 
 .news-item {
