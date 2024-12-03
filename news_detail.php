@@ -3,24 +3,54 @@ include('database.php');
 
 // Check if 'id' is passed in the URL
 if (isset($_GET['id'])) {
-    $id = $_GET['id']; 
+    $id = $_GET['id'];
 
-    // Fetch the article from the database by its ID
     $article = $collection->findOne(['_id' => new MongoDB\BSON\ObjectId($id)]);
 
-    // If the article is found
     if ($article) {
-        // Format the created_at and updated_at fields (if exists)
-        $createdAt = $article['created_at']->toDateTime()->format('Y-m-d H:i:s');
-        $updatedAt = isset($article['updated_at']) ? $article['updated_at']->toDateTime()->format('Y-m-d H:i:s') : 'Not updated yet';
+        $createdAt = $article['created_at']->toDateTime();
+        $createdAt->setTimezone(new DateTimeZone('Asia/Jakarta')); // Convert to local timezone
+        $createdAtFormatted = $createdAt->format('d F Y, H:i'); // Format: 03 December 2024, 17:45
+
+        $updatedAt = isset($article['updated_at'])
+            ? $article['updated_at']->toDateTime()->setTimezone(new DateTimeZone('Asia/Jakarta'))->format('d F Y, H:i')
+            : 'Not updated yet';
 
         // Display the article details
-        echo "<h1>" . htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8') . "</h1>";
-        echo "<p><strong>Author:</strong> " . htmlspecialchars($article['author'], ENT_QUOTES, 'UTF-8') . "</p>";
-        echo "<p><strong>Published on:</strong> " . $createdAt . "</p>";
-        echo "<p><strong>Last updated on:</strong> " . $updatedAt . "</p>";
-        echo "<div><strong>Summary:</strong><p>" . nl2br(htmlspecialchars($article['summary'], ENT_QUOTES, 'UTF-8')) . "</p></div>"; // Added summary for better details
-        echo "<div><strong>Content:</strong><p>" . nl2br(htmlspecialchars($article['content'], ENT_QUOTES, 'UTF-8')) . "</p></div>";
+        ?>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title><?php echo htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8'); ?></title>
+            <link rel="stylesheet" href="style.css"> <!-- Link ke file CSS -->
+        </head>
+        <body class="detail">
+            <div class="container">
+                <h1 class="news-title"><?php echo htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8'); ?></h1>
+                <p class="news-meta">
+                    <strong>Published on:</strong> <?php echo $createdAtFormatted; ?> |
+                    <strong>Last updated:</strong> <?php echo $updatedAt; ?>
+                </p>
+                <p class="news-meta"><strong>Author:</strong> <?php echo htmlspecialchars($article['author'], ENT_QUOTES, 'UTF-8'); ?></p>
+
+                <!-- Summary -->
+                <div class="news-summary">
+                    <p><strong>Summary:</strong> <?php echo nl2br(htmlspecialchars($article['summary'], ENT_QUOTES, 'UTF-8')); ?></p>
+                </div>
+
+                <!-- Content -->
+                <div class="news-content">
+                    <?php echo nl2br(htmlspecialchars($article['content'], ENT_QUOTES, 'UTF-8')); ?>
+                </div>
+
+                <!-- Back Link -->
+            </div>
+            <a href="userPage.php" class="back-link">← Back to News List</a>
+        </body>
+        </html>
+        <?php
     } else {
         echo "<p>Article not found!</p>";
     }
