@@ -20,6 +20,7 @@ $news = $collection->find();
   <input type="text" id="search" placeholder="Search news..." onkeyup="searchNews()">
   <a href="userPage.php" class="btn-user-page">Back to User Page</a>
   <style>
+    
   .btn-user-page {
       display: inline-block;
       margin-left: 10px;
