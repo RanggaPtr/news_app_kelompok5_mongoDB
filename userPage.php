@@ -10,14 +10,14 @@ $news = $collection->find();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News Website</title>
+    <title>ZonaBerita</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <header>
         <div class="header-container">
-            <h1>News Website</h1>
+            <h1>ZonaBerita</h1>
             <button id="top-right-button" onclick="loginAdmin()">Login Admin</button>
         </div>
         <input type="text" id="search" placeholder="Search news..." onkeyup="searchNews()">
@@ -27,10 +27,14 @@ $news = $collection->find();
         <div id="news-list">
             <?php
             foreach ($news as $article) {
-                echo "<div class='news-item'>";
-                echo "<h2><a href='news_detail.php?id=" . $article['_id'] . "'>" . $article['title'] . "</a></h2>";
-                echo "<p>" . $article['summary'] . "</p>";
-                echo "</div>";
+              $createdAtUTC = $article['created_at']->toDateTime(); 
+              $createdAtUTC->setTimezone(new DateTimeZone('Asia/Jakarta')); 
+              $createdAt = $createdAtUTC->format('d M Y, H:i'); 
+              echo "<div class='news-item'>";
+              echo "<h2><a href='news_detail.php?id=" . $article['_id'] . "'>" . $article['title'] . "</a></h2>";
+              echo "<p><strong>Date:</strong> " . $createdAt . "</p>"; 
+              echo "<p>" . $article['summary'] . "</p>";
+              echo "</div>";
             }
             ?>
         </div>
