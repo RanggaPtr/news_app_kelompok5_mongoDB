@@ -163,8 +163,8 @@ h2 {
   top: 15px;
   transform: translateY(-50%);
   padding: 10px 10px;
-  background-color: #007bff;
-  color: white;
+  background-color: #FFF;
+  color: #34495e;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -173,7 +173,7 @@ h2 {
 
 /* Hover Effect for the Button */
 #top-right-button:hover {
-  background-color: #0056b3;
+  font-style: italic;
 }
 
 #search {
