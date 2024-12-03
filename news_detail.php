@@ -26,7 +26,7 @@ if (isset($_GET['id'])) {
             <title><?php echo htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8'); ?></title>
             <link rel="stylesheet" href="style.css"> <!-- Link ke file CSS -->
         </head>
-        <body>
+        <body class="detail">
             <div class="container">
                 <h1 class="news-title"><?php echo htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8'); ?></h1>
                 <p class="news-meta">

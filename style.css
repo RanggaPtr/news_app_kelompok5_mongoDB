@@ -194,6 +194,10 @@ main {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+.detail {
+  background-color: #34495e;
+}
+
 .container {
   max-width: 1000px;
   margin: 20px auto;
@@ -239,7 +243,7 @@ main {
 .back-link {
   display: inline-block;
   margin-top: 0px;
-  color: #007BFF;
+  color: #FFF;
   text-decoration: none;
   margin-left: 310px;
 }
