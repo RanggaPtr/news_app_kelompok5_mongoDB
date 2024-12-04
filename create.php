@@ -58,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <input type="text" id="category" name="category" required> <!-- New input for category -->
 
       <button type="submit">Create Article</button>
+      <a href="adminPage.php"><button type="button">Kembali</button></a>
     </form>
   </main>
 </body>

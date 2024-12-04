@@ -72,7 +72,7 @@ textarea {
 }
 
 textarea#content {
-  height: 270px; /* Increases the height of the summary textarea */
+  height: 260px; /* Increases the height of the summary textarea */
   font-size: 1.1rem; /* Adjust font size if needed */
   padding: 10px;
   margin: 5px 0;
@@ -90,8 +90,9 @@ button {
   background-color: #34495e;
   color: white;
   border: none;
-  padding: 5px 20px;
+  padding: 10px 20px;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 button:hover {
