@@ -3,8 +3,18 @@ include('database.php');
 
 // Fetch all news articles from the database
 // $news = $collection->find();
+
 // Fetch news articles from the database, sorted by created_at in descending order
 $news = $collection->find([], ['sort' => ['created_at' => -1]]);
+// Fetch selected category from request
+$selectedCategory = $_GET['category'] ?? '';
+
+// Query to fetch news articles based on selected category, sorted by created_at in descending order
+$query = $selectedCategory ? ['category' => $selectedCategory] : [];
+$news = $collection->find($query, ['sort' => ['created_at' => -1]]);
+
+// Fetch all unique categories from the database
+$categories = $collection->distinct('category');
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +29,18 @@ $news = $collection->find([], ['sort' => ['created_at' => -1]]);
 <body>
 <header>
   <h1>ZonaBerita</h1>
+  <div class="filter-container">
+            <label for="category-select">Filter by Category:</label>
+            <select id="category-select" onchange="filterByCategory()">
+                <option value="">All Categories</option>
+                <?php
+                foreach ($categories as $category) {
+                    $selected = $selectedCategory === $category ? 'selected' : '';
+                    echo "<option value='$category' $selected>$category</option>";
+                }
+                ?>
+            </select>
+        </div>
   <input type="text" id="search" placeholder="Search news..." onkeyup="searchNews()">
   <a href="userPage.php" class="btn-user-page">Back to User Page</a>
   <style>
@@ -85,6 +107,13 @@ $news = $collection->find([], ['sort' => ['created_at' => -1]]);
       }
     });
   }
+
+  function filterByCategory() {
+        const category = document.getElementById('category-select').value;
+        const url = new URL(window.location.href);
+        url.searchParams.set('category', category); // Set parameter for category
+        window.location.href = url.toString(); // Redirect to the updated URL
+    }
 </script>
 
 </body>
