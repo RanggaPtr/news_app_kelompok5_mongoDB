@@ -1,24 +1,14 @@
 <?php
 include('database.php');
 
-// Fetch news articles from the database asc
-// $news = $collection->find();
+// Fetch selected category from request
+$selectedCategory = $_GET['category'] ?? '';
 
-// Fetch news articles from the database, sorted by created_at in descending order
-$news = $collection->find([], ['sort' => ['created_at' => -1]]);
+// Query to fetch news articles based on selected category, sorted by created_at in descending order
+$query = $selectedCategory ? ['category' => $selectedCategory] : [];
+$news = $collection->find($query, ['sort' => ['created_at' => -1]]);
 
-// Ambil kategori yang dipilih dari request
-$selectedCategory = isset($_GET['category']) ? $_GET['category'] : '';
-
-// Jika kategori dipilih, filter berita berdasarkan kategori
-if ($selectedCategory) {
-    $news = $collection->find(['category' => $selectedCategory], ['sort' => ['created_at' => -1]]);
-} else {
-    // Jika tidak ada kategori yang dipilih, tampilkan semua berita
-    $news = $collection->find([], ['sort' => ['created_at' => -1]]);
-}
-
-// Ambil semua kategori unik dari database
+// Fetch all unique categories from the database
 $categories = $collection->distinct('category');
 ?>
 
@@ -53,7 +43,6 @@ $categories = $collection->distinct('category');
         <input type="text" id="search" placeholder="Search news..." onkeyup="searchNews()">
     </header>
 
-
     <main>
         <div id="news-list">
             <?php
@@ -62,9 +51,9 @@ $categories = $collection->distinct('category');
                 $createdAtUTC->setTimezone(new DateTimeZone('Asia/Jakarta'));
                 $createdAt = $createdAtUTC->format('d M Y, H:i');
                 echo "<div class='news-item'>";
-                echo "<h2><a href='news_detail.php?id=" . $article['_id'] . "'>" . $article['title'] . "</a></h2>";
-                echo "<p><strong>Date:</strong> " . $createdAt . "</p>";
-                echo "<p>" . $article['summary'] . "</p>";
+                echo "<h2><a href='news_detail.php?id=" . $article['_id'] . "'>" . htmlspecialchars($article['title']) . "</a></h2>";
+                echo "<p><strong>Date:</strong> " . htmlspecialchars($createdAt) . "</p>";
+                echo "<p>" . htmlspecialchars($article['summary']) . "</p>";
                 echo "</div>";
             }
             ?>
@@ -72,46 +61,45 @@ $categories = $collection->distinct('category');
     </main>
 
     <script>
-        function searchNews() {
-            let input = document.getElementById('search').value.toLowerCase();
-            let newsItems = document.querySelectorAll('.news-item');
+    function searchNews() {
+        let input = document.getElementById('search').value.toLowerCase();
+        let newsItems = document.querySelectorAll('.news-item');
 
-            newsItems.forEach(function (item) {
-                let title = item.querySelector('h2').textContent.toLowerCase();
-                if (title.indexOf(input) > -1) {
-                    item.style.display = '';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        }
+        newsItems.forEach(function(item) {
+            let title = item.querySelector('h2').textContent.toLowerCase();
+            if (title.indexOf(input) > -1) {
+                item.style.display = '';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
 
-        function loginAdmin() {
-            let adminCode = prompt("Please enter the admin code:");
-            if (adminCode === null) return; // User pressed cancel
+    function loginAdmin() {
+        let adminCode = prompt("Please enter the admin code:");
+        if (adminCode === null || adminCode.trim() === '') return; // Handle cancel or empty input
 
-            // Send the admin code to the PHP page for validation
-            let form = document.createElement('form');
-            form.method = 'POST';
-            form.action = 'adminPage.php';
+        // Send the admin code to the PHP page for validation
+        let form = document.createElement('form');
+        form.method = 'POST';
+        form.action = 'connect2Admin.php'; // Ensure the validation script matches this file
 
-            let input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = 'admin_code';
-            input.value = adminCode;
+        let input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'adminCode';
+        input.value = adminCode;
 
-            form.appendChild(input);
-            document.body.appendChild(form);
-            form.submit();
-        }
+        form.appendChild(input);
+        document.body.appendChild(form);
+        form.submit();
+    }
 
-        function filterByCategory() {
-            const category = document.getElementById('category-select').value;
-            const url = new URL(window.location.href);
-            url.searchParams.set('category', category); // Set parameter kategori
-            window.location.href = url.toString(); // Redirect ke URL baru
-        }
-
+    function filterByCategory() {
+        const category = document.getElementById('category-select').value;
+        const url = new URL(window.location.href);
+        url.searchParams.set('category', category); // Set parameter for category
+        window.location.href = url.toString(); // Redirect to the updated URL
+    }
     </script>
 </body>
 
