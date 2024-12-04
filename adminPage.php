@@ -77,17 +77,17 @@ $categories = $collection->distinct('category');
       } else {
           foreach ($news as $article) {
               $createdAt = $article['created_at']->toDateTime()->format('d M Y, H:i'); // Format waktu
+              
               echo "<div class='news-item'>";
               echo "<h3><a href='news_detail.php?id=" . $article['_id'] . "'>" . htmlspecialchars($article['title']) . "</a></h3>";
               echo "<p><strong>Summary:</strong> " . htmlspecialchars($article['summary']) . "</p>";
-              echo "<p><strong>Date:</strong> " . $createdAt . "</p>";
+              echo "<p><strong>Date:</strong> " . $createdAt . " | <strong>Category:</strong> " . htmlspecialchars($article['category']) . "</p>";
               echo "<a href='edit.php?id=" . $article['_id'] . "' class='btn btn-primary'>Edit</a> | ";
               echo "<a href='delete.php?id=" . $article['_id'] . "' class='btn btn-danger' onclick='return confirm(\"Are you sure you want to delete this article?\")'>Delete</a>";
               echo "</div>";
           }
       }
       ?>
-
 </div>
 
   </main>
