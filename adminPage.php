@@ -27,15 +27,15 @@ $news = $collection->find([], ['sort' => ['created_at' => -1]]);
       display: inline-block;
       margin-left: 10px;
       padding: 10px 15px;
-      background-color: #007BFF;
-      color: white;
+      background-color: #FFF;
+      color: #34495e;
       text-decoration: none;
       border-radius: 5px;
       font-size: 14px;
   }
 
   .btn-user-page:hover {
-      background-color: #0056b3;
+    font-style: italic;
   }
 </style>
 </header>
