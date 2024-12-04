@@ -71,8 +71,23 @@ textarea {
   margin: 5px 0;
 }
 
+textarea#content {
+  height: 270px; /* Increases the height of the summary textarea */
+  font-size: 1.1rem; /* Adjust font size if needed */
+  padding: 10px;
+  margin: 5px 0;
+}
+
+textarea#summary {
+  height: 50px; /* Increases the height of the summary textarea */
+  font-size: 1.1rem; /* Adjust font size if needed */
+  padding: 10px;
+  margin: 5px 0;
+}
+
+
 button {
-  background-color: #4CAF50;
+  background-color: #34495e;
   color: white;
   border: none;
   padding: 5px 20px;
@@ -80,7 +95,7 @@ button {
 }
 
 button:hover {
-  background-color: #45a049;
+  font-style: italic;
 }
 
 #news-list {
