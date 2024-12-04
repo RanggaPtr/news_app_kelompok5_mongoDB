@@ -18,7 +18,7 @@ $news = $collection->find([], ['sort' => ['created_at' => -1]]);
 </head>
 <body>
 <header>
-  <h1>Admin Panel</h1>
+  <h1>ZonaBerita</h1>
   <input type="text" id="search" placeholder="Search news..." onkeyup="searchNews()">
   <a href="userPage.php" class="btn-user-page">Back to User Page</a>
   <style>
