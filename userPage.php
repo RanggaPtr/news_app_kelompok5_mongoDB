@@ -1,5 +1,7 @@
 <?php
 include('database.php');
+// Fetch news articles from the database, sorted by created_at in descending order
+$news = $collection->find([], ['sort' => ['created_at' => -1]]);
 
 // Fetch selected category from request
 $selectedCategory = $_GET['category'] ?? '';
