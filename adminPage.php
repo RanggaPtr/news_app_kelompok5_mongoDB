@@ -1,9 +1,6 @@
 <?php
 include('database.php');
-// Fetch selected category from request
-$selectedCategory = $_GET['category'] ?? '';
 
-<<<<<<< HEAD
 // Fetch all news articles from the database
 // $news = $collection->find();
 
@@ -12,8 +9,6 @@ $news = $collection->find([], ['sort' => ['created_at' => -1]]);
 // Fetch selected category from request
 $selectedCategory = $_GET['category'] ?? '';
 
-=======
->>>>>>> 748a18072065cf01fbf23f5233be058ef37b695d
 // Query to fetch news articles based on selected category, sorted by created_at in descending order
 $query = $selectedCategory ? ['category' => $selectedCategory] : [];
 $news = $collection->find($query, ['sort' => ['created_at' => -1]]);
@@ -27,17 +22,13 @@ $categories = $collection->distinct('category');
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZonaBerita - Admin</title>
+  <title>ZonaBerita</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <header>
-<<<<<<< HEAD
   <h1>ZonaBerita</h1>
-=======
-  <h1>ZonaBerita - Admin Page</h1>
->>>>>>> 748a18072065cf01fbf23f5233be058ef37b695d
   <div class="filter-container">
             <label for="category-select">Filter by Category:</label>
             <select id="category-select" onchange="filterByCategory()">
