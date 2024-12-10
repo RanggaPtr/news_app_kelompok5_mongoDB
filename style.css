@@ -99,6 +99,33 @@ button:hover {
   font-style: italic;
 }
 
+/* Menyembunyikan input file asli */
+.file-input {
+  display: none;
+}
+
+/* Styling label yang bertindak sebagai tombol */
+.file-label {
+  background-color: #34495e;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  display: inline-block;
+}
+
+/* Efek saat hover pada tombol */
+.file-label:hover {
+  font-style: italic;
+}
+
+/* Menambahkan gaya untuk file yang sudah dipilih */
+.file-input:focus + .file-label {
+  border: 2px solid #34495e;
+}
+
+
 #news-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

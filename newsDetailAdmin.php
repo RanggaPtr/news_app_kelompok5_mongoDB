@@ -55,7 +55,13 @@ if (isset($_GET['id'])) {
             <strong>Author:</strong> <?php echo htmlspecialchars($article['author'], ENT_QUOTES, 'UTF-8'); ?> |
             <strong>Category:</strong> <?php echo htmlspecialchars($article['category'], ENT_QUOTES, 'UTF-8'); ?>
         </p>
-
+        <div class="news-image">
+                    <?php if (!empty($article['image'])) { 
+                        echo "<img src=". htmlspecialchars($article['image'], ENT_QUOTES, 'UTF-8'). " alt='Article Image' class='article-image'>";
+                     } else { 
+                        echo "<p>No image available for this article.</p>";
+                    } ?>
+                </div>
 
         <!-- Summary -->
         <div class="news-summary">
