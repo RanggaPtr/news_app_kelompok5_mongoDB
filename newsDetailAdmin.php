@@ -92,7 +92,7 @@ if (isset($_GET['id'])) {
 
         <!-- Back Link -->
     </div>
-    <a href="userPage.php" class="back-link">← Back to News List</a>
+    <a href="adminPage.php" class="back-link">← Back to News List</a>
 </body>
 
 </html>

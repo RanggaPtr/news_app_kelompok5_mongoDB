@@ -20,17 +20,19 @@ $categories = $collection->distinct('category');
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZonaBerita</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZonaBerita</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
-<header>
-  <h1>ZonaBerita</h1>
-  <div class="filter-container">
+    <header>
+        <h1>ZonaBerita</h1>
+        <div class="filter-container">
             <label for="category-select">Filter by Category:</label>
             <select id="category-select" onchange="filterByCategory()">
                 <option value="">All Categories</option>
@@ -42,36 +44,35 @@ $categories = $collection->distinct('category');
                 ?>
             </select>
         </div>
-  <input type="text" id="search" placeholder="Search news..." onkeyup="searchNews()">
-  <a href="userPage.php" class="btn-user-page">Back to User Page</a>
-  <style>
-    
-  .btn-user-page {
-      display: inline-block;
-      margin-left: 10px;
-      padding: 10px 15px;
-      background-color: #FFF;
-      color: #34495e;
-      text-decoration: none;
-      border-radius: 5px;
-      font-size: 14px;
-  }
+        <input type="text" id="search" placeholder="Search news..." onkeyup="searchNews()">
+        <a href="userPage.php" class="btn-user-page">Back to User Page</a>
+        <style>
+        .btn-user-page {
+            display: inline-block;
+            margin-left: 10px;
+            padding: 10px 15px;
+            background-color: #FFF;
+            color: #34495e;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
 
-  .btn-user-page:hover {
-    font-style: italic;
-  }
-</style>
-</header>
+        .btn-user-page:hover {
+            font-style: italic;
+        }
+        </style>
+    </header>
 
-  
-  <main>
-    <h2>Manage News Articles</h2>
-    <nav>
-      <a href="create.php">Create New Article</a>
-    </nav>
 
-    <div id="news-list">
-    <?php
+    <main>
+        <h2>Manage News Articles</h2>
+        <nav>
+            <a href="create.php">Create New Article</a>
+        </nav>
+
+        <div id="news-list">
+            <?php
       if ($news->isDead()) {
           echo "<p>No articles available</p>";
       } else {
@@ -79,7 +80,7 @@ $categories = $collection->distinct('category');
               $createdAt = $article['created_at']->toDateTime()->format('d M Y, H:i'); // Format waktu
               
               echo "<div class='news-item'>";
-              echo "<h3><a href='news_detail.php?id=" . $article['_id'] . "'>" . htmlspecialchars($article['title']) . "</a></h3>";
+              echo "<h3><a href='newsDetailAdmin.php?id=" . $article['_id'] . "'>" . htmlspecialchars($article['title']) . "</a></h3>";
               echo "<p><strong>Summary:</strong> " . htmlspecialchars($article['summary']) . "</p>";
               echo "<p><strong>Date:</strong> " . $createdAt . " | <strong>Category:</strong> " . htmlspecialchars($article['category']) . "</p>";
               echo "<a href='edit.php?id=" . $article['_id'] . "' class='btn btn-primary'>Edit</a> | ";
@@ -88,34 +89,35 @@ $categories = $collection->distinct('category');
           }
       }
       ?>
-</div>
+        </div>
 
-  </main>
+    </main>
 
-  <script>
-  function searchNews() {
-    let input = document.getElementById('search').value.toLowerCase();
-    let newsItems = document.querySelectorAll('.news-item'); 
+    <script>
+    function searchNews() {
+        let input = document.getElementById('search').value.toLowerCase();
+        let newsItems = document.querySelectorAll('.news-item');
 
-    newsItems.forEach(function(item) {
+        newsItems.forEach(function(item) {
 
-      let title = item.querySelector('h3').textContent.toLowerCase();
+            let title = item.querySelector('h3').textContent.toLowerCase();
 
-      if (title.indexOf(input) > -1) {
-        item.style.display = ''; 
-      } else {
-        item.style.display = 'none'; 
-      }
-    });
-  }
+            if (title.indexOf(input) > -1) {
+                item.style.display = '';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
 
-  function filterByCategory() {
+    function filterByCategory() {
         const category = document.getElementById('category-select').value;
         const url = new URL(window.location.href);
         url.searchParams.set('category', category); // Set parameter for category
         window.location.href = url.toString(); // Redirect to the updated URL
     }
-</script>
+    </script>
 
 </body>
+
 </html>
