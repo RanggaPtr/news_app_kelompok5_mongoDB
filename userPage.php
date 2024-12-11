@@ -52,14 +52,20 @@ $categories = $collection->distinct('category');
                 $createdAtUTC = $article['created_at']->toDateTime();
                 $createdAtUTC->setTimezone(new DateTimeZone('Asia/Jakarta'));
                 $createdAt = $createdAtUTC->format('d M Y, H:i');
-                
+
                 echo "<div class='news-item'>";
+                
+                // Tampilkan gambar jika ada
+                if (!empty($article['image'])) {
+                    echo "<img src='" . htmlspecialchars($article['image']) . "' alt='" . htmlspecialchars($article['title']) . "' style='max-width: 200px; height: auto; margin-bottom: 10px;'>";
+                }
+                
                 echo "<h2><a href='news_detail.php?id=" . $article['_id'] . "'>" . htmlspecialchars($article['title']) . "</a></h2>";
                 echo "<p><strong>Date:</strong> " . htmlspecialchars($createdAt) . " | <strong>Category:</strong> " . htmlspecialchars($article['category']) . "</p>";
                 echo "<p>" . htmlspecialchars($article['summary']) . "</p>";
                 echo "</div>";
             }
-            ?>
+        ?>
         </div>
     </main>
 
