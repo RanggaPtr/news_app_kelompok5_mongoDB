@@ -1,5 +1,5 @@
 <?php
-require 'vendor/autoload.php'; // Use Composer for MongoDB driver
+require '../vendor/autoload.php'; // Use Composer for MongoDB driver
 
 // MongoDB Connection
 $client = new MongoDB\Client("mongodb://localhost:27017"); // Replace with your MongoDB URI
