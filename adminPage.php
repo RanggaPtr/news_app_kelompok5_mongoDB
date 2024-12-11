@@ -70,14 +70,16 @@ $categories = $collection->distinct('category');
                 echo "<p>No articles available</p>";
             } else {
                 foreach ($news as $article) {
-                    $createdAt = $article['created_at']->toDateTime()->format('d M Y, H:i'); // Format waktu
+                    $createdAtUTC = $article['created_at']->toDateTime();
+                    $createdAtUTC->setTimezone(new DateTimeZone('Asia/Jakarta'));
+                    $createdAt = $createdAtUTC->format('d M Y, H:i');
 
                     echo "<div class='news-item'>";
                     // Tampilkan gambar jika ada
+                    echo "<h3><a href='newsDetailAdmin.php?id=" . $article['_id'] . "'>" . htmlspecialchars($article['title']) . "</a></h3>";
                     if (!empty($article['image'])) {
                         echo "<img src='" . htmlspecialchars($article['image']) . "' alt='" . htmlspecialchars($article['title']) . "' style='max-width: 200px; height: auto; margin-bottom: 10px;'>";
                     }
-                    echo "<h3><a href='newsDetailAdmin.php?id=" . $article['_id'] . "'>" . htmlspecialchars($article['title']) . "</a></h3>";
                     echo "<p><strong>Summary:</strong> " . htmlspecialchars($article['summary']) . "</p>";
                     echo "<p><strong>Date:</strong> " . $createdAt . " | <strong>Category:</strong> " . htmlspecialchars($article['category']) . "</p>";
                     echo "<a href='edit.php?id=" . $article['_id'] . "' class='btn btn-primary'>Edit</a> | ";

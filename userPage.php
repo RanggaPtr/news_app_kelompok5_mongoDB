@@ -54,7 +54,6 @@ $categories = $collection->distinct('category');
                 $createdAt = $createdAtUTC->format('d M Y, H:i');
 
                 echo "<div class='news-item'>";
-                
                 // Tampilkan gambar jika ada
                 echo "<h2><a href='news_detail.php?id=" . $article['_id'] . "'>" . htmlspecialchars($article['title']) . "</a></h2>";
                 if (!empty($article['image'])) {
