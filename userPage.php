@@ -30,22 +30,19 @@ $categories = $collection->distinct('category');
             <h1>ZonaBerita</h1>
             <button id="top-right-button" onclick="loginAdmin()">Login Admin</button>
         </div>
-        <div class="filter-container">
-            <label for="category-select">Filter by Category:</label>
-            <select id="category-select" onchange="filterByCategory()">
-                <option value="">All Categories</option>
-                <?php
-                foreach ($categories as $category) {
-                    $selected = $selectedCategory === $category ? 'selected' : '';
-                    echo "<option value='$category' $selected>$category</option>";
-                }
-                ?>
-            </select>
+        <div class="filter-buttons">
+            <button class="filter-button" onclick="filterByCategory('')">All Categories</button>
+            <?php
+            foreach ($categories as $category) {
+                $activeClass = $selectedCategory === $category ? 'active' : '';
+                echo "<button class='filter-button $activeClass' onclick=\"filterByCategory('$category')\">$category</button>";
+            }
+            ?>
         </div>
         <input type="text" id="search" placeholder="Search news..." onkeyup="searchNews()">
     </header>
 
-    <main>
+    <main class="wrapper">
         <div id="news-list">
         <?php
             foreach ($news as $article) {
@@ -55,12 +52,11 @@ $categories = $collection->distinct('category');
 
                 echo "<div class='news-item'>";
                 // Tampilkan gambar jika ada
-                echo "<h2><a href='news_detail.php?id=" . $article['_id'] . "'>" . htmlspecialchars($article['title']) . "</a></h2>";
                 if (!empty($article['image'])) {
-                    echo "<img src='" . htmlspecialchars($article['image']) . "' alt='" . htmlspecialchars($article['title']) . "' style='max-width: 200px; height: auto; margin-bottom: 10px;'>";
+                    echo "<img src='" . htmlspecialchars($article['image']) . "' alt='" . htmlspecialchars($article['title']) . "' style='max-width: 440px; height: auto; margin-bottom: 10px;'>";
                 }
+                echo "<h2><a href='news_detail.php?id=" . $article['_id'] . "'>" . htmlspecialchars($article['title']) . "</a></h2>";
                 echo "<p><strong>Date:</strong> " . htmlspecialchars($createdAt) . " | <strong>Category:</strong> " . htmlspecialchars($article['category']) . "</p>";
-                echo "<p>" . htmlspecialchars($article['summary']) . "</p>";
                 echo "</div>";
             }
         ?>
@@ -101,8 +97,7 @@ $categories = $collection->distinct('category');
         form.submit();
     }
 
-    function filterByCategory() {
-        const category = document.getElementById('category-select').value;
+    function filterByCategory(category) {
         const url = new URL(window.location.href);
         url.searchParams.set('category', category); // Set parameter for category
         window.location.href = url.toString(); // Redirect to the updated URL
