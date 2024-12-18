@@ -78,6 +78,8 @@ $categories = $collection->distinct('category');
                     if (!empty($article['image'])) {
                         echo "<img src='" . htmlspecialchars($article['image']) . "' alt='" . htmlspecialchars($article['title']) . "' style='max-width: 270px; height: auto; margin-bottom: 10px;'>";
                     }
+                    echo "<p>Views: " . htmlspecialchars($article['views'] ?? 0) . "</p>";
+
                     echo "<h3><a href='newsDetailAdmin.php?id=" . $article['_id'] . "'>" . htmlspecialchars($article['title']) . "</a></h3>";
                     echo "<p><strong>Date:</strong> " . $createdAt . " | <strong>Category:</strong> " . htmlspecialchars($article['category']) . "</p>";
                     echo "<a href='edit.php?id=" . $article['_id'] . "' class='btn btn-primary'>Edit</a> | ";

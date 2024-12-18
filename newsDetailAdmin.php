@@ -5,6 +5,10 @@ include('database.php');
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
+    $collection->updateOne(
+        ['_id' => new MongoDB\BSON\ObjectId($id)],
+        ['$inc' => ['views' => 1]]
+    );
     $article = $collection->findOne(['_id' => new MongoDB\BSON\ObjectId($id)]);
 
     if ($article) {
@@ -50,7 +54,8 @@ if (isset($_GET['id'])) {
                 <h1 class="news-title"><?php echo htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8'); ?></h1>
                 <p class="news-meta">
                     <strong>Published on:</strong> <?php echo $createdAtFormatted; ?> |
-                    <strong>Last updated:</strong> <?php echo $updatedAt; ?>
+                    <strong>Last updated:</strong> <?php echo $updatedAt; ?> |
+                    <strong>Views:</strong> <?php echo htmlspecialchars($article['views']); ?>
                 </p>
                 <p class="news-meta">
                     <strong>Author:</strong> <?php echo htmlspecialchars($article['author'], ENT_QUOTES, 'UTF-8'); ?> |

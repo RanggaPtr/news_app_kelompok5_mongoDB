@@ -55,6 +55,7 @@ $categories = $collection->distinct('category');
                 if (!empty($article['image'])) {
                     echo "<img src='" . htmlspecialchars($article['image']) . "' alt='" . htmlspecialchars($article['title']) . "' style='max-width: 440px; height: auto; margin-bottom: 10px;'>";
                 }
+                echo "<p>Views: " . htmlspecialchars($article['views'] ?? 0) . "</p>";
                 echo "<h2><a href='news_detail.php?id=" . $article['_id'] . "'>" . htmlspecialchars($article['title']) . "</a></h2>";
                 echo "<p><strong>Date:</strong> " . htmlspecialchars($createdAt) . " | <strong>Category:</strong> " . htmlspecialchars($article['category']) . "</p>";
                 echo "</div>";
