@@ -20,8 +20,8 @@ if (isset($_GET['id'])) {
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'])) {
             $comment = htmlspecialchars($_POST['comment'], ENT_QUOTES, 'UTF-8');
-            $username = htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8');
-
+            $username = 'Anonymous'; // Tetapkan username sebagai 'Anonymous'
+        
             // Insert the comment into the `comments` collection
             $commentsCollection->insertOne([
                 'article_id' => new MongoDB\BSON\ObjectId($id),
@@ -30,6 +30,7 @@ if (isset($_GET['id'])) {
                 'created_at' => new MongoDB\BSON\UTCDateTime()
             ]);
         }
+        
 
         // Retrieve comments linked to the current article
         $comments = $commentsCollection->find(['article_id' => new MongoDB\BSON\ObjectId($id)]);
@@ -57,9 +58,9 @@ if (isset($_GET['id'])) {
                 </p>
 
                 <div class="news-image">
-                    <?php if (!empty($article['image'])) { 
-                        echo "<img src=". htmlspecialchars($article['image'], ENT_QUOTES, 'UTF-8'). " alt='Article Image' class='article-image'>";
-                    } else { 
+                    <?php if (!empty($article['image'])) {
+                        echo "<img src=" . htmlspecialchars($article['image'], ENT_QUOTES, 'UTF-8') . " alt='Article Image' class='article-image'>";
+                    } else {
                         echo "<p>No image available for this article.</p>";
                     } ?>
                 </div>
@@ -80,12 +81,12 @@ if (isset($_GET['id'])) {
                 <div class="comments-section">
                     <h2>Comments</h2>
                     <form method="POST" action="">
-                        <label for="username">Name:</label><br>
-                        <input type="text" id="username" name="username" required><br><br>
+                        <input type="hidden" name="username" value="Anonymous"> <!-- Input tersembunyi -->
                         <label for="comment">Comment:</label><br>
                         <textarea id="comment" name="comment" rows="5" required></textarea><br><br>
                         <button type="submit">Submit Comment</button>
                     </form>
+
                     <div class="comments-list">
                         <?php foreach ($comments as $comment) {
                             $commentDate = $comment['created_at']->toDateTime()->setTimezone(new DateTimeZone('Asia/Jakarta'))->format('d F Y, H:i');
