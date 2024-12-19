@@ -10,7 +10,6 @@ $news = $collection->find($query, ['sort' => ['created_at' => -1]]);
 
 // Fetch all unique categories from the database
 $categories = $collection->distinct('category');
-$article = $collection->findOne(['_id' => new MongoDB\BSON\ObjectId($id)]);
 ?>
 
 <!DOCTYPE html>
